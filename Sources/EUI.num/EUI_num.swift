@@ -20,7 +20,7 @@ public struct EUIScreenView: View {
                 title: screen.title,
                 backgroundColor: screen.backgroundColor.someColor,
                 headerView: screen.headerView?.someView,
-                someView: screen.someView.someView,
+                someView: screen.bodyView.someView,
                 footerView: screen.footerView?.someView
             )
         )
@@ -106,17 +106,41 @@ public class EUIApp {
 }
 
 public struct EUIScreen {
-    let id: String
-    let title: String
-    let backgroundColor: EUIColor
-    let headerView: EUIView?
-    let someView: EUIView
-    let footerView: EUIView?
+    public let id: String
+    public let title: String
+    public let backgroundColor: EUIColor
+    public let headerView: EUIView?
+    public let bodyView: EUIView
+    public let footerView: EUIView?
+    
+    public init(
+        id: String,
+        title: String,
+        backgroundColor: EUIColor,
+        headerView: EUIView? = nil,
+        bodyView: EUIView,
+        footerView: EUIView? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.backgroundColor = backgroundColor
+        self.headerView = headerView
+        self.bodyView = bodyView
+        self.footerView = footerView
+    }
 }
 
 public struct EUIAction {
-    let id: String
-    let action: Chain
+    public let id: String
+    public let action: Chain
+    
+    public init(
+        id: String,
+        action: Chain
+    ) {
+        self.id = id
+        self.action = action
+    }
 }
 
 func test() {
@@ -126,7 +150,7 @@ func test() {
             title: "Init Screen",
             backgroundColor: .white,
             headerView: nil,
-            someView: .label(
+            bodyView: .label(
                 SomeLabel(title: "Hello, World...", font: .title)
             ),
             footerView: nil
@@ -149,7 +173,7 @@ func test() {
                 title: "Another Screen",
                 backgroundColor: .white,
                 headerView: nil,
-                someView: .label(
+                bodyView: .label(
                     SomeLabel(title: "Hello, World!!!", font: .title)
                 ),
                 footerView: nil
