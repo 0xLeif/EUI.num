@@ -1,4 +1,5 @@
 import XCTest
+import ScreenData
 @testable import EUI_num
 
 final class EUI_numTests: XCTestCase {
@@ -6,7 +7,14 @@ final class EUI_numTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(EUI_num().text, "Hello, World!")
+        _ = SomeView(
+            .label(
+                SomeLabel(
+                    title: "Hello, World!", font: .title
+                )
+            )
+        )
+//        XCTAssertEqual(someView, "Hello, World!")
     }
 
     static var allTests = [
