@@ -111,14 +111,14 @@ public struct EUIAppView: View {
 }
 
 public class EUIApp {
-    @Observed var action: String?
+    @Observed public var action: String?
     
-    var initialScreen: EUIScreen
+    public var initialScreen: EUIScreen
     
-    var screens: [EUIScreen]
-    var actions: [EUIAction]
+    public var screens: [EUIScreen]
+    public var actions: [EUIAction]
     
-    init(
+    public init(
         initialScreen: EUIScreen,
         screens: [EUIScreen] = [],
         actions: [EUIAction] = []
