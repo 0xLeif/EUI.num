@@ -7,7 +7,11 @@ import SwiftUI
 import ScreenDataUI
 
 public struct EUIScreenView: View {
-    let screen: EUIScreen
+    public let screen: EUIScreen
+    
+    public init(screen: EUIScreen) {
+        self.screen = screen
+    }
     
     public var body: some View {
         SDScreen(
