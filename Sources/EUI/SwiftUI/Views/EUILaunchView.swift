@@ -16,7 +16,6 @@ struct EUILaunchView<Content>: View where Content: View {
     
     var app: EUIApp
     
-    var launchTime: UInt32 = 1
     var launchedView: () -> Content
     
     private var launchView: some View {
@@ -90,7 +89,7 @@ struct EUILaunchView<Content>: View where Content: View {
                         // MARK: Wait `launchTime`
                         //
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(launchTime)) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(app.launchScreenDuration)) {
                             shouldPresentContent = true
                         }
                         

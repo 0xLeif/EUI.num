@@ -12,6 +12,8 @@ import Combine
 
 public class EUIApp {
     public var launchScreen: EUIScreen?
+    public var launchScreenDuration: UInt32
+    
     public var initialScreen: EUIScreen
     
     public var screens: [EUIScreen]
@@ -20,12 +22,14 @@ public class EUIApp {
     
     public init(
         launchScreen: EUIScreen? = nil,
+        launchScreenDuration: UInt32 = 1,
         initialScreen: EUIScreen,
         screens: [EUIScreen] = [],
         actions: [EUIAction] = [],
         fonts: EUIFonts = EUIFonts()
     ) {
         self.launchScreen = launchScreen
+        self.launchScreenDuration = launchScreenDuration
         self.initialScreen = initialScreen
         self.screens = screens
         self.actions = actions
