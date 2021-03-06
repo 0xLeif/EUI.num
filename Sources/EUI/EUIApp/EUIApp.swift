@@ -25,6 +25,7 @@ public class EUIApp {
         actions: [EUIAction] = [],
         fonts: EUIFonts = EUIFonts()
     ) {
+        self.launchScreen = launchScreen
         self.initialScreen = initialScreen
         self.screens = screens
         self.actions = actions
