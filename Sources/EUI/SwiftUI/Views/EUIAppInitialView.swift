@@ -16,7 +16,15 @@ public struct EUIAppInitialView: View {
     
     public var body: some View {
         NavigationView {
-            EUIScreenView(screen: $app.initialScreen)
+            ZStack {
+                EUIScreenView(screen: $app.initialScreen)
+                
+                if app.debug {
+                    VStack {
+                        Text("Total Number of Screens: \(app.screens.count)")
+                    }
+                }
+            }
         }
     }
 }

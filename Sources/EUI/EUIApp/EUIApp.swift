@@ -22,6 +22,8 @@ public struct EUIApp {
     public var actions: [EUIAction]
     public var theme: EUITheme
     
+    public var debug: Bool = false
+    
     public init(
         launchScreen: EUIScreen? = nil,
         launchScreenDuration: UInt32 = 1,
