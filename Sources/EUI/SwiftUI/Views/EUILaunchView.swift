@@ -40,12 +40,7 @@ struct EUILaunchView<Content>: View where Content: View {
         // MARK: SDCustomViews
         // Views that conform to SDCustomizedView
         
-        //        SDCustomView.add(customView: LabeledExpandingView())
-        //        SDCustomView.add(customView: WelcomeHeaderView())
-        //        SDCustomView.add(customView: DividerView())
-        //        SDCustomView.add(customView: SectionHeaderView())
-        //        SDCustomView.add(customView: LabelledImage())
-        //        SDCustomView.add(customView: GalleryImage())
+        app.customViews.forEach(SDCustomView.add(customView:))
         
         // MARK: Default Colors
         //
