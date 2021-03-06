@@ -50,7 +50,16 @@ struct EUILaunchView<Content>: View where Content: View {
         // MARK: Default Colors
         //
         
-        //        SDImage.defaultForegroundColor = .white
+        if let defaultForegroundColor = app.theme.defaultImageForegroundColor {
+            SDImage.defaultForegroundColor = Color(
+                UIColor(red: CGFloat(defaultForegroundColor.someColor.red),
+                        green: CGFloat(defaultForegroundColor.someColor.green),
+                        blue: CGFloat(defaultForegroundColor.someColor.blue),
+                        alpha: CGFloat(defaultForegroundColor.someColor.alpha))
+            )
+        } else {
+            SDImage.defaultForegroundColor = .gray
+        }
         
         // MARK: SDButton Actions
         //
@@ -66,12 +75,12 @@ struct EUILaunchView<Content>: View where Content: View {
         // MARK: SDFont Values
         //
         
-        SDFont.largeTitleFont = app.fonts.largeTitle
-        SDFont.titleFont = app.fonts.title
-        SDFont.headlingFont = app.fonts.headline
-        SDFont.bodyFont = app.fonts.body
-        SDFont.footnoteFont = app.fonts.footnote
-        SDFont.captionFont = app.fonts.caption
+        SDFont.largeTitleFont = app.theme.fonts.largeTitle
+        SDFont.titleFont = app.theme.fonts.title
+        SDFont.headlingFont = app.theme.fonts.headline
+        SDFont.bodyFont = app.theme.fonts.body
+        SDFont.footnoteFont = app.theme.fonts.footnote
+        SDFont.captionFont = app.theme.fonts.caption
         
         guard shouldPresentContent else {
             return AnyView(

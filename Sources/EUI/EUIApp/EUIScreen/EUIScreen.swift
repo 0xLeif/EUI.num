@@ -42,9 +42,9 @@ public extension EUIScreen {
             id: id,
             title: someScreen.title,
             backgroundColor: EUIColor.custom(someScreen.backgroundColor),
-            headerView: someScreen.headerView.map { EUIView(someView: $0) },
+            headerView: someScreen.headerView.map(EUIView.init(someView:)),
             bodyView: EUIView(someView: someScreen.someView),
-            footerView: someScreen.footerView.map { EUIView(someView: $0) }
+            footerView: someScreen.footerView.map(EUIView.init(someView:))
         )
     }
 }
