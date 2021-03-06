@@ -11,19 +11,24 @@ import ScreenDataNavigation
 import Combine
 
 public class EUIApp {
+    public var launchScreen: EUIScreen?
     public var initialScreen: EUIScreen
     
     public var screens: [EUIScreen]
     public var actions: [EUIAction]
+    public var fonts: EUIFonts
     
     public init(
+        launchScreen: EUIScreen? = nil,
         initialScreen: EUIScreen,
         screens: [EUIScreen] = [],
-        actions: [EUIAction] = []
+        actions: [EUIAction] = [],
+        fonts: EUIFonts = EUIFonts()
     ) {
         self.initialScreen = initialScreen
         self.screens = screens
         self.actions = actions
+        self.fonts = fonts
     }
 }
 

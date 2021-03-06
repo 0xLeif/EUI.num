@@ -59,14 +59,20 @@ struct EUILaunchView<Content>: View where Content: View {
         // MARK: SDFont Values
         //
         
-        //        SDFont.largeTitleFont = Font.custom("Futura-Bold", size: 34, relativeTo: .largeTitle)
-        //        SDFont.titleFont = Font.custom("Futura-Bold", size: 28, relativeTo: .title)
-        //        SDFont.headlingFont = Font.custom("Futura-Bold", size: 17, relativeTo: .headline)
-        //        SDFont.bodyFont = Font.custom("Futura", size: 17, relativeTo: .body)
-        //        SDFont.footnoteFont = Font.custom("Futura", size: 13, relativeTo: .footnote)
-        //        SDFont.captionFont = Font.custom("Futura-Bold", size: 12, relativeTo: .caption)
+        SDFont.largeTitleFont = app.fonts.largeTitle
+        SDFont.titleFont = app.fonts.title
+        SDFont.headlingFont = app.fonts.headline
+        SDFont.bodyFont = app.fonts.body
+        SDFont.footnoteFont = app.fonts.footnote
+        SDFont.captionFont = app.fonts.caption
         
         guard shouldPresentContent else {
+            if let launchScreen = app.launchScreen {
+                return AnyView(
+                    EUIScreenView(screen: launchScreen)
+                )
+            }
+            
             return AnyView(
                 ProgressView()
                     .padding()
