@@ -11,7 +11,7 @@ import ScreenDataNavigation
 import Combine
 import SwiftUI
 
-public class EUIApp {
+public struct EUIApp {
     public var launchScreen: EUIScreen?
     public var launchScreenDuration: UInt32
     
@@ -47,8 +47,8 @@ enum EUIAppScreenProvidingError: Error {
 
 extension EUIApp: ScreenProviding {
     public func screen(forID id: String) -> AnyPublisher<SomeScreen, Error> {
-        Future { [weak self] promise in
-            guard let screen = self?.screens.first(where: { $0.id == id }) else {
+        Future { promise in
+            guard let screen = self.screens.first(where: { $0.id == id }) else {
                 promise(.failure(EUIAppScreenProvidingError.screenNotFound))
                 return
             }
