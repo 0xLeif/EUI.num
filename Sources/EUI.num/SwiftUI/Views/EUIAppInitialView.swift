@@ -1,5 +1,5 @@
 //
-//  EUIAppView.swift
+//  EUIAppInitialView.swift
 //
 //
 //  Created by Leif on 3/5/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct EUIAppView: View {
+public struct EUIAppInitialView: View {
     public let app: EUIApp
     
     public init(app: EUIApp) {
@@ -15,6 +15,8 @@ public struct EUIAppView: View {
     }
     
     public var body: some View {
-        EUIScreenView(screen: app.initialScreen)
+        NavigationView {
+            EUIScreenView(screen: app.initialScreen)
+        }
     }
 }

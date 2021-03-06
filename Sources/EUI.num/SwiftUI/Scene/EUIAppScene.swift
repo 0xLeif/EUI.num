@@ -18,7 +18,7 @@ public struct EUIAppScene: Scene {
     public var body: some Scene {
         WindowGroup {
             EUILaunchView(app: app, launchTime: 1) {
-                EUIScreenView(screen: app.initialScreen)
+                EUIAppInitialView(app: app)
             }
         }
     }
