@@ -19,6 +19,14 @@ struct EUILaunchView<Content>: View where Content: View {
     var launchTime: UInt32 = 1
     var launchedView: () -> Content
     
+    private var launchView: some View {
+        if let launchScreen = app.launchScreen {
+            return AnyView(EUIScreenView(screen: launchScreen))
+        }
+        
+        return AnyView(ProgressView())
+    }
+    
     var body: some View {
         // MARK: SDScreenProvider default
         // ScreenProvider loads Cached Screens with ScreenCacheMonitor
@@ -67,14 +75,8 @@ struct EUILaunchView<Content>: View where Content: View {
         SDFont.captionFont = app.fonts.caption
         
         guard shouldPresentContent else {
-            if let launchScreen = app.launchScreen {
-                return AnyView(
-                    EUIScreenView(screen: launchScreen)
-                )
-            }
-            
             return AnyView(
-                ProgressView()
+                launchView
                     .padding()
                     .frame(maxWidth: .infinity,
                            maxHeight: .infinity,
@@ -97,7 +99,6 @@ struct EUILaunchView<Content>: View where Content: View {
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                         fetchInitialData()
                     }
-                
             )
         }
         
