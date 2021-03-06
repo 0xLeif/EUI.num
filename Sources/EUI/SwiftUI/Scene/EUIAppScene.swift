@@ -27,8 +27,8 @@ public struct EUIAppScene: Scene {
     
     public var body: some Scene {
         WindowGroup {
-            EUILaunchView(app: app, launchChain: initialLoadChain) {
-                EUIAppInitialView(app: app)
+            EUILaunchView(app: $app, launchChain: initialLoadChain) {
+                EUIAppInitialView(app: $app)
                     .onAppear {
                         _ = onAppearChain?.run(name: "EUIAppInitialView.onAppearChain", logging: true)
                     }

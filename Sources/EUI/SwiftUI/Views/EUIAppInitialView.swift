@@ -8,15 +8,15 @@
 import SwiftUI
 
 public struct EUIAppInitialView: View {
-    public let app: EUIApp
+    @Binding public var app: EUIApp
     
-    public init(app: EUIApp) {
-        self.app = app
+    public init(app: Binding<EUIApp>) {
+        self._app = app
     }
     
     public var body: some View {
         NavigationView {
-            EUIScreenView(screen: app.initialScreen)
+            EUIScreenView(screen: $app.initialScreen)
         }
     }
 }

@@ -16,13 +16,14 @@ import Chain
 struct EUILaunchView<Content>: View where Content: View {
     @State private var shouldPresentContent = false
     
-    var app: EUIApp
+    @Binding var app: EUIApp
     var launchChain: Chain?
     var launchedView: () -> Content
     
     private var launchView: some View {
-        if let launchScreen = app.launchScreen {
-            return AnyView(EUIScreenView(screen: launchScreen))
+        if let launchScreen = app.launchScreen,
+           let boundScreen = Binding<EUIScreen>(State(initialValue: launchScreen).projectedValue) {
+            return AnyView(EUIScreenView(screen: boundScreen))
         }
         
         return AnyView(ProgressView())
