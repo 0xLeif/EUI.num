@@ -50,3 +50,7 @@ EUIAppScene(
     )
 )
 ```
+
+## Example Project
+
+[**EUI-POC**](https://github.com/0xLeif/EUI-POC)
