@@ -9,11 +9,11 @@ import ScreenData
 
 public struct EUIScreen {
     public let id: String
-    public let title: String
-    public let backgroundColor: EUIColor
-    public let headerView: EUIView?
-    public let bodyView: EUIView
-    public let footerView: EUIView?
+    public var title: String
+    public var backgroundColor: EUIColor
+    public var headerView: EUIView?
+    public var bodyView: EUIView
+    public var footerView: EUIView?
     
     public init(
         id: String,
