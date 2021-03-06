@@ -7,18 +7,31 @@
 
 import SwiftUI
 import ScreenData
+import Chain
 
 public struct EUIAppScene: Scene {
     @Binding public var app: EUIApp
     
-    public init(app: Binding<EUIApp>) {
+    public var initialLoadChain: Chain?
+    public var onAppearChain: Chain?
+    
+    public init(
+        app: Binding<EUIApp>,
+        initialLoadChain: Chain? = nil,
+        onAppearChain: Chain? = nil
+    ) {
         self._app = app
+        self.initialLoadChain = initialLoadChain
+        self.onAppearChain = onAppearChain
     }
     
     public var body: some Scene {
         WindowGroup {
-            EUILaunchView(app: app) {
+            EUILaunchView(app: app, launchChain: initialLoadChain) {
                 EUIAppInitialView(app: app)
+                    .onAppear {
+                        _ = onAppearChain?.run(name: "EUIAppInitialView.onAppearChain", logging: true)
+                    }
             }
         }
     }

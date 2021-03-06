@@ -11,11 +11,13 @@ import ScreenData
 import ScreenDataUI
 import ScreenDataNavigation
 
+import Chain
+
 struct EUILaunchView<Content>: View where Content: View {
     @State private var shouldPresentContent = false
     
     var app: EUIApp
-    
+    var launchChain: Chain?
     var launchedView: () -> Content
     
     private var launchView: some View {
@@ -111,6 +113,6 @@ struct EUILaunchView<Content>: View where Content: View {
     }
     
     func fetchInitialData() {
-        
+        _ = launchChain?.run(name: "EUILaunchView.launchChain", logging: true)
     }
 }
