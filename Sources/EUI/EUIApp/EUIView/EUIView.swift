@@ -35,3 +35,24 @@ public enum EUIView {
         }
     }
 }
+
+public extension EUIView {
+    init(someView: SomeView) {
+        switch someView.type {
+        case .label:
+            self = EUIView.label(someView.someLabel!)
+        case .image:
+            self = EUIView.image(someView.someImage!)
+        case .button:
+            self = EUIView.button(someView.someButton!)
+        case .container:
+            self = EUIView.container(someView.someContainer!)
+        case .custom:
+            self = EUIView.custom(someView.someCustomView!)
+        case .spacer:
+            self = EUIView.spacer(someView.someSpacer!)
+        case .text:
+            self = EUIView.text(someView.someText!)
+        }
+    }
+}
