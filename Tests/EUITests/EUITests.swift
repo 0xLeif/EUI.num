@@ -1,8 +1,8 @@
 import XCTest
 import ScreenData
-@testable import EUI_num
+@testable import EUI
 
-final class EUI_numTests: XCTestCase {
+final class EUITests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
