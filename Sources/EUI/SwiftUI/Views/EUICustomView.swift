@@ -15,14 +15,14 @@ public struct EUICustomView<Content>: SDCustomizedView where Content: View {
         _id
     }
     
-    public var content: Content
+    public var content: (SomeCustomView) -> Content
     
-    public init(id: String, content: () -> Content) {
+    public init(id: String, content: @escaping (SomeCustomView) -> Content) {
         self._id = id
-        self.content = content()
+        self.content = content
     }
 
     public func view(forSomeCustomView customView: SomeCustomView) -> AnyView {
-        AnyView(content)
+        AnyView(content(customView))
     }
 }
