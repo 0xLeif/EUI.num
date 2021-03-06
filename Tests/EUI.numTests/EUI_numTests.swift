@@ -11,10 +11,10 @@ final class EUI_numTests: XCTestCase {
             id: "",
             title: "",
             backgroundColor: .green,
-            someView: .label(SomeLabel(title: "Hello, World!", font: .title))
+            bodyView: .label(SomeLabel(title: "Hello, World!", font: .title))
         )
         
-        XCTAssertEqual(screen.someView.someView.someLabel?.title, "Hello, World?")
+        XCTAssertEqual(screen.bodyView.someView.someLabel?.title, "Hello, World?")
     }
     
     static var allTests = [

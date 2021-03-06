@@ -6,6 +6,10 @@ import Observation
 import SwiftUI
 import ScreenDataUI
 
+import ScreenDataNavigation
+
+import Combine
+
 public struct EUIScreenView: View {
     public let screen: EUIScreen
     
@@ -143,6 +147,31 @@ public class EUIApp {
     }
 }
 
+enum EUIAppScreenProvidingError: Error {
+    case screenNotFound
+}
+
+extension EUIApp: ScreenProviding {
+    public func screen(forID id: String) -> AnyPublisher<SomeScreen, Error> {
+        Future { [weak self] promise in
+            guard let screen = self?.screens.first(where: { $0.id == id }) else {
+                promise(.failure(EUIAppScreenProvidingError.screenNotFound))
+                return
+            }
+            
+            promise(.success(SomeScreen(
+                id: screen.id,
+                title: screen.title,
+                backgroundColor: screen.backgroundColor.someColor,
+                headerView: screen.headerView?.someView,
+                someView: screen.bodyView.someView,
+                footerView: screen.footerView?.someView
+            )))
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
 public struct EUIAction {
     public let id: String
     public let action: Chain
@@ -154,56 +183,4 @@ public struct EUIAction {
         self.id = id
         self.action = action
     }
-}
-
-func test() {
-    let app = EUIApp(
-        initialScreen: EUIScreen(
-            id: "init",
-            title: "Init Screen",
-            backgroundColor: .white,
-            headerView: nil,
-            bodyView: .label(
-                SomeLabel(title: "Hello, World...", font: .title)
-            ),
-            footerView: nil
-        ),
-        screens: [
-            //            SomeScreen(
-            //                id: "init",
-            //                title: "Init Screen",
-            //                backgroundColor: .init(red: 1, green: 1, blue: 1),
-            //                headerView: nil,
-            //                someView: SomeView(
-            //                    .label(
-            //                        SomeLabel(title: "Hello, World...", font: .title)
-            //                    )
-            //                ),
-            //                footerView: nil
-            //            )
-            EUIScreen(
-                id: "another",
-                title: "Another Screen",
-                backgroundColor: .white,
-                headerView: nil,
-                bodyView: .label(
-                    SomeLabel(title: "Hello, World!!!", font: .title)
-                ),
-                footerView: nil
-            )
-        ],
-        actions: [
-            EUIAction(
-                id: "print",
-                action: .complete(
-                    .void {
-                        print("Hello, World!")
-                    }
-                )
-            )
-            //            "print": .void {
-            //                print("Hello, World!")
-            //            }
-        ]
-    )
 }
