@@ -9,10 +9,10 @@ import SwiftUI
 import ScreenData
 
 public struct EUIAppScene: Scene {
-    public let app: EUIApp
+    @Binding public var app: EUIApp
     
-    public init(app: EUIApp) {
-        self.app = app
+    public init(app: Binding<EUIApp>) {
+        self._app = app
     }
     
     public var body: some Scene {
