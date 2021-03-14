@@ -19,7 +19,7 @@ let package = Package(
         
         // Primary Packages
         .package(name: "Observation", url: "https://github.com/0xLeif/Observation", from: "0.0.1"),
-        .package(name: "ScreenDataUI", url: "https://github.com/ServerDriven/ScreenDataUI-ios", from: "0.5.0"),
+        .package(name: "ScreenDataUI", url: "https://github.com/ServerDriven/ScreenDataUI-ios", .branch("feature/UpdatingDestinationLink")),
         
         // Helper Packages
         .package(name: "xColor", url: "https://github.com/0xLeif/xColor", from: "0.1.0"),

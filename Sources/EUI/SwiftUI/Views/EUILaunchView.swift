@@ -11,16 +11,19 @@ import ScreenData
 import ScreenDataUI
 import ScreenDataNavigation
 
+import Chain
+
 struct EUILaunchView<Content>: View where Content: View {
     @State private var shouldPresentContent = false
     
-    var app: EUIApp
-    
+    @Binding var app: EUIApp
+    var launchChain: Chain?
     var launchedView: () -> Content
     
     private var launchView: some View {
-        if let launchScreen = app.launchScreen {
-            return AnyView(EUIScreenView(screen: launchScreen))
+        if let launchScreen = app.launchScreen,
+           let boundScreen = Binding<EUIScreen>(State(initialValue: launchScreen).projectedValue) {
+            return AnyView(EUIScreenView(screen: boundScreen))
         }
         
         return AnyView(ProgressView())
@@ -40,17 +43,21 @@ struct EUILaunchView<Content>: View where Content: View {
         // MARK: SDCustomViews
         // Views that conform to SDCustomizedView
         
-        //        SDCustomView.add(customView: LabeledExpandingView())
-        //        SDCustomView.add(customView: WelcomeHeaderView())
-        //        SDCustomView.add(customView: DividerView())
-        //        SDCustomView.add(customView: SectionHeaderView())
-        //        SDCustomView.add(customView: LabelledImage())
-        //        SDCustomView.add(customView: GalleryImage())
+        app.customViews.forEach(SDCustomView.add(customView:))
         
         // MARK: Default Colors
         //
         
-        //        SDImage.defaultForegroundColor = .white
+        if let defaultForegroundColor = app.theme.defaultImageForegroundColor {
+            SDImage.defaultForegroundColor = Color(
+                UIColor(red: CGFloat(defaultForegroundColor.someColor.red),
+                        green: CGFloat(defaultForegroundColor.someColor.green),
+                        blue: CGFloat(defaultForegroundColor.someColor.blue),
+                        alpha: CGFloat(defaultForegroundColor.someColor.alpha))
+            )
+        } else {
+            SDImage.defaultForegroundColor = .gray
+        }
         
         // MARK: SDButton Actions
         //
@@ -66,12 +73,12 @@ struct EUILaunchView<Content>: View where Content: View {
         // MARK: SDFont Values
         //
         
-        SDFont.largeTitleFont = app.fonts.largeTitle
-        SDFont.titleFont = app.fonts.title
-        SDFont.headlingFont = app.fonts.headline
-        SDFont.bodyFont = app.fonts.body
-        SDFont.footnoteFont = app.fonts.footnote
-        SDFont.captionFont = app.fonts.caption
+        SDFont.largeTitleFont = app.theme.fonts.largeTitle
+        SDFont.titleFont = app.theme.fonts.title
+        SDFont.headlingFont = app.theme.fonts.headline
+        SDFont.bodyFont = app.theme.fonts.body
+        SDFont.footnoteFont = app.theme.fonts.footnote
+        SDFont.captionFont = app.theme.fonts.caption
         
         guard shouldPresentContent else {
             return AnyView(
@@ -107,6 +114,6 @@ struct EUILaunchView<Content>: View where Content: View {
     }
     
     func fetchInitialData() {
-        
+        _ = launchChain?.run(name: "EUILaunchView.launchChain", logging: true)
     }
 }

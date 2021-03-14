@@ -9,11 +9,11 @@ import ScreenData
 
 public struct EUIScreen {
     public let id: String
-    public let title: String
-    public let backgroundColor: EUIColor
-    public let headerView: EUIView?
-    public let bodyView: EUIView
-    public let footerView: EUIView?
+    public var title: String
+    public var backgroundColor: EUIColor
+    public var headerView: EUIView?
+    public var bodyView: EUIView
+    public var footerView: EUIView?
     
     public init(
         id: String,
@@ -42,9 +42,9 @@ public extension EUIScreen {
             id: id,
             title: someScreen.title,
             backgroundColor: EUIColor.custom(someScreen.backgroundColor),
-            headerView: someScreen.headerView.map { EUIView(someView: $0) },
+            headerView: someScreen.headerView.map(EUIView.init(someView:)),
             bodyView: EUIView(someView: someScreen.someView),
-            footerView: someScreen.footerView.map { EUIView(someView: $0) }
+            footerView: someScreen.footerView.map(EUIView.init(someView:))
         )
     }
 }

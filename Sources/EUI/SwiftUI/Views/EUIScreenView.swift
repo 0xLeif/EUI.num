@@ -11,10 +11,10 @@ import ScreenDataUI
 import SwiftUI
 
 public struct EUIScreenView: View {
-    public let screen: EUIScreen
+    @Binding public var screen: EUIScreen
     
-    public init(screen: EUIScreen) {
-        self.screen = screen
+    public init(screen: Binding<EUIScreen>) {
+        self._screen = screen
     }
     
     public var body: some View {

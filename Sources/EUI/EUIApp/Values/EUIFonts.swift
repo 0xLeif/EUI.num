@@ -10,12 +10,12 @@ import ScreenData
 import SwiftUI
 
 public struct EUIFonts {
-    public let largeTitle: Font?
-    public let title: Font?
-    public let headline: Font?
-    public let body: Font?
-    public let footnote: Font?
-    public let caption: Font?
+    public var largeTitle: Font?
+    public var title: Font?
+    public var headline: Font?
+    public var body: Font?
+    public var footnote: Font?
+    public var caption: Font?
     
     public init(
         largeTitle: Font? = nil,
